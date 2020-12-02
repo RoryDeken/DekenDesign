@@ -79,6 +79,10 @@
         justify-content: center;
       }
 
+      #calc label {
+        flex-basis: 100%;
+      }
+
       #calc .answers {
         display: flex;
         justify-content: space-evenly;
@@ -99,6 +103,12 @@
 
       .results {
         margin-top: 50px;
+      }
+
+      .results #cost {
+        display: block;
+        font-size: 32px;
+        margin-top: 24px;
       }
     </style>
   </head>
@@ -161,7 +171,7 @@
             </noscript>
             <form id="calc">
               <div class="question">
-                <label for"pages">How many informational pages will you need? <span class="info" title="ie. how it works, contact us etc."><i class="fa fa-info-circle"></i></span></label>
+                <label for="pages">How many informational pages will you need? <span class="info" title="ie. how it works, contact us etc."><i class="fa fa-info-circle"></i></span></label>
                 <div class="answers">
                   <div class="answer"><input type="radio" name="pages" value="1000"> 1-3 </div>
                   <div class="answer"> <input type="radio" name="pages" value="2000"> 4-9 </div>
@@ -170,17 +180,13 @@
                 </div>
               </div>
               <div class="question">
-                <label for"login">Do people have to log in? <span class="info"
+                <label for="login">Do people have to log in? <span class="info"
                     title="An email login is generally best to start with unless your app will have tight integration with services like Facebook or Twitter, in which case social login is better."><i class="fa fa-info-circle"></i></span></label>
                 <div class="answers">
-                  <div class="answer"> Email login <input type="radio" name="login" value="2000">
-                  </div>
-                  <div class="answer"> Social login <input type="radio" name="login" value="3000">
-                  </div>
-                  <div class="answer"> No <input type="radio" name="login" value="0">
-                  </div>
-                  <div class="answer"> I don't know <input type="radio" name="pages" value="0">
-                  </div>
+                  <div class="answer"><input type="radio" name="login" value="2000"> Email login </div>
+                  <div class="answer"><input type="radio" name="login" value="3000"> Social login </div>
+                  <div class="answer"><input type="radio" name="login" value="0"> No </div>
+                  <div class="answer"><input type="radio" name="login" value="0"> I don't know </div>
                 </div>
               </div>
               <div class="question">
@@ -246,7 +252,7 @@
               <button class="btn next" type="button" href="#">Next</button>
               <button class="btn previous" type="button" href="#">Back</button>
             </form>
-            <p class="results">Your estimated cost is: <span id="cost"></span>.</p>
+            <p class="results">Your estimated cost is: <span id="cost"></span></p>
           </div>
         </div>
       </div>
@@ -332,27 +338,62 @@
     <!-- Template Main Javascript File -->
     <script src="./dekendesign/js/main.js"></script>
     <script>
-      var pos = 0;
+      var pos = 0,
+        len = $("#calc .question").length,
+        total;
       $(document).ready(function() {
         $("#calc .question").hide();
         $("#calc .question").eq(pos).show();
         $("#calc .btn.previous").hide();
       });
+      $("#calc").change(function() {
+        total = 0;
+        $('#calc .question input[type="radio"]:checked').each(function() {
+          total = total + parseInt($(this).val());
+        });
+        console.log(total);
+      });
 
-      function change(dir) {
-        console.log(dir);
+      function change(event) {
         console.log(pos);
-        console.log('Scroll');
-        var len = $("#calc .question").length;
-        $("#calc .question").hide();
-        $("#calc .question").eq(pos).show();
-        pos = pos + dir;
-        if (pos > len) {
-          pos = 0;
+        if (pos == len - 1 && total != undefined) {
+          if (total == 0) {
+            $("#cost").text("Please call or email us for a customized quote that will meet your project neeeds");
+          } else {
+            $("#cost").text("$" + total + "-$" + total * 1.3);
+          }
+          if (event.data.position < 0) {
+            pos = pos + event.data.position;
+            $("#calc .btn.next").text('Next');
+            $("#calc .question").eq(pos).show();
+          }
+        } else {
+          $("#calc .question").hide();
+          pos = pos + event.data.position;
+          $("#calc .question").eq(pos).show();
+          $("#calc .btn.previous").show();
+          if (pos > 0) {
+            $("#calc .btn.previous").show();
+          } else {
+            $("#calc .btn.previous").hide();
+          }
+          if (pos >= len - 1) {
+            $("#calc .btn.next").text('Calculate');
+          } else {
+            $("#calc .btn.next").show();
+            $("#calc .btn.next").text('Next');
+          }
+          if (pos >= len || pos < 0) {
+            pos = 0;
+          }
         }
       }
-      $("#calc .btn.previous").on("click", change);
-      $("#calc .btn.next").on("click", change);
+      $("#calc .btn.previous").click({
+        position: -1
+      }, change);
+      $("#calc .btn.next").click({
+        position: 1
+      }, change);
     </script>
   </body>
 
