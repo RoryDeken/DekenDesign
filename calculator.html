@@ -64,9 +64,12 @@
       #calc .btn {
         position: absolute;
         bottom: 0;
+        background: #c7d6db;
+        color: #fff;
       }
 
-      #calc .btn.next {
+      #calc .btn.next,
+      #calc .btn.submit {
         right: 0;
       }
 
@@ -79,8 +82,9 @@
         justify-content: center;
       }
 
-      #calc label {
+      #calc p {
         flex-basis: 100%;
+        color: #000;
       }
 
       #calc .answers {
@@ -91,6 +95,67 @@
 
       #calc .answers .answer {
         cursor: pointer;
+      }
+
+      label {
+        display: -webkit-box;
+        display: flex;
+        cursor: pointer;
+        font-weight: 500;
+        position: relative;
+        overflow: hidden;
+        margin-bottom: 0.375em;
+      }
+
+      /*
+      label:focus-within {
+        outline: .125em solid #29314b;
+      }
+*/
+      label input {
+        position: absolute;
+        left: -9999px;
+      }
+
+      label input:checked+span {
+        background-color: #c7d6db;
+        color: #fff;
+      }
+
+      label input:checked+span:before {
+        box-shadow: inset 0 0 0 0.4375em #29314b;
+      }
+
+      label span {
+        display: -webkit-box;
+        display: flex;
+        -webkit-box-align: center;
+        align-items: center;
+        padding: 0.375em 0.75em 0.375em 0.375em;
+        border-radius: 99em;
+        -webkit-transition: 0.25s ease;
+        transition: 0.25s ease;
+        color: #2a314b;
+      }
+
+      label span:hover {
+        background-color: #c7d6db;
+        color: #fff;
+      }
+
+      label span:before {
+        display: -webkit-box;
+        display: flex;
+        flex-shrink: 0;
+        content: "";
+        background-color: #fff;
+        width: 1.5em;
+        height: 1.5em;
+        border-radius: 50%;
+        margin-right: 0.375em;
+        -webkit-transition: 0.25s ease;
+        transition: 0.25s ease;
+        box-shadow: inset 0 0 0 0.125em #29314b;
       }
 
       span.info {
@@ -154,7 +219,7 @@
     <div id="blue">
       <div class="container">
         <div class="row">
-          <div class="col-lg-3 centered">
+          <div class="col-lg-3 hidden-sm hidden-xs hidden-md centered">
             <img src="./dekendesign/img/calculator.png" alt="Image of a calculator">
           </div>
           <div id="calculator" class="col-lg-9 centered">
@@ -171,86 +236,87 @@
             </noscript>
             <form id="calc">
               <div class="question">
-                <label for="pages">How many informational pages will you need? <span class="info" title="ie. how it works, contact us etc."><i class="fa fa-info-circle"></i></span></label>
+                <p for="pages">How many informational pages will you need? <span class="info" title="ie. how it works, contact us etc."><i class="fa fa-info-circle"></i></span></p>
                 <div class="answers">
-                  <div class="answer"><input type="radio" name="pages" value="1000"> 1-3 </div>
-                  <div class="answer"> <input type="radio" name="pages" value="2000"> 4-9 </div>
-                  <div class="answer"> <input type="radio" name="pages" value="3000"> 10+ </div>
-                  <div class="answer"><input type="radio" name="pages" value="0"> I don't know </div>
+                  <div class="answer"><label><input type="radio" name="pages" value="1000"><span>1-3</span></label></div>
+                  <div class="answer"><label><input type="radio" name="pages" value="2000"><span>4-9</span></label></div>
+                  <div class="answer"><label><input type="radio" name="pages" value="3000"><span>10+</span></label></div>
+                  <div class="answer"><label><input type="radio" name="pages" value="0"><span>I don't know</span></label></div>
                 </div>
               </div>
               <div class="question">
-                <label for="login">Do people have to log in? <span class="info"
-                    title="An email login is generally best to start with unless your app will have tight integration with services like Facebook or Twitter, in which case social login is better."><i class="fa fa-info-circle"></i></span></label>
+                <p for="login">Do people have to log in? <span class="info"
+                    title="An email login is generally best to start with unless your app will have tight integration with services like Facebook or Twitter, in which case social login is better."><i class="fa fa-info-circle"></i></span></p>
                 <div class="answers">
-                  <div class="answer"><input type="radio" name="login" value="2000"> Email login </div>
-                  <div class="answer"><input type="radio" name="login" value="3000"> Social login </div>
-                  <div class="answer"><input type="radio" name="login" value="0"> No </div>
-                  <div class="answer"><input type="radio" name="login" value="0"> I don't know </div>
+                  <div class="answer"><label><input type="radio" name="login" value="2000"><span>Email login </span></label></div>
+                  <div class="answer"><label><input type="radio" name="login" value="3000"><span>Social login </span></label></div>
+                  <div class="answer"><label><input type="radio" name="login" value="0"><span>No</span></label></div>
+                  <div class="answer"><label><input type="radio" name="login" value="0"><span>I don't know</span></label></div>
                 </div>
               </div>
               <div class="question">
-                <label for"profiles">Do people create personal profiles? <span class="info" title="A profile means that some of the people that use your app will have to enter information about themselves that might be viewed publicly."><i
-                      class="fa fa-info-circle"></i></span></label>
+                <p for"profiles">Do people create personal profiles? <span class="info" title="A profile means that some of the people that use your app will have to enter information about themselves that might be viewed publicly."><i
+                      class="fa fa-info-circle"></i></span></p>
                 <div class="answers">
-                  <div class="answer"> Yes <input type="radio" name="profiles" value="3000">
+                  <div class="answer"><label><input type="radio" name="profiles" value="3000"><span>Yes</span></label>
                   </div>
-                  <div class="answer"> No <input type="radio" name="profiles" value="0">
+                  <div class="answer"><label><input type="radio" name="profiles" value="0"><span>No</span></label>
                   </div>
-                  <div class="answer"> I don't know <input type="radio" name="pages" value="0">
-                  </div>
-                </div>
-              </div>
-              <div class="question">
-                <label for"payments">Will you need to accept payments?<span class="info" title="Accept credit cards, PayPal, Bitcoin."><i class="fa fa-info-circle"></i></span></label>
-                <div class="answers">
-                  <div class="answer"> Yes <input type="radio" name="payments" value="3000">
-                  </div>
-                  <div class="answer"> No <input type="radio" name="payments" value="0">
+                  <div class="answer"><label><input type="radio" name="pages" value="0"><span>I don't know</span></label>
                   </div>
                 </div>
               </div>
               <div class="question">
-                <label for"review">Will people rate or review things?</label>
+                <p for"payments">Will you need to accept payments?<span class="info" title="Accept credit cards, PayPal, Bitcoin."><i class="fa fa-info-circle"></i></span></p>
                 <div class="answers">
-                  <div class="answer"> Yes <input type="radio" name="review" value="3000">
+                  <div class="answer"><label><input type="radio" name="payments" value="3000"><span>Yes</span></label>
                   </div>
-                  <div class="answer"> No <input type="radio" name="review" value="0">
+                  <div class="answer"><label><input type="radio" name="payments" value="0"><span>No</span></label>
                   </div>
                 </div>
               </div>
               <div class="question">
-                <label for"api">Does your website need to connect with another app or website?<span class="info" title="ie. share data with a mobile application)? This means you'll need to make an API (or Application Programming Interface). It's how all your friendly apps
-                  talk to each other."><i class="fa fa-info-circle"></i></span></label>
+                <p for"review">Will people rate or review things?</p>
                 <div class="answers">
-                  <div class="answer"> Yes <input type="radio" name="api" value="5000">
+                  <div class="answer"><label><input type="radio" name="review" value="3000"><span>Yes</span></label>
                   </div>
-                  <div class="answer"> No <input type="radio" name="api" value="0">
+                  <div class="answer"><label><input type="radio" name="review" value="0"><span>No</span></label>
                   </div>
                 </div>
               </div>
               <div class="question">
-                <label for"search">Does your website need search? <span class="info" title="The cost to build a search function can vary greatly. The price given here is an average for search integration based on basic tagging. Not Google."><i
-                      class="fa fa-info-circle"></i></span></label>
+                <p for"api">Does your website need to connect with another app or website?<span class="info" title="ie. share data with a mobile application)? This means you'll need to make an API (or Application Programming Interface). It's how all your friendly apps
+                  talk to each other."><i class="fa fa-info-circle"></i></span></p>
                 <div class="answers">
-                  <div class="answer"> Yes <input type="radio" name="search" value="2000">
+                  <div class="answer"><label><input type="radio" name="api" value="5000"><span>Yes</span></label>
                   </div>
-                  <div class="answer"> No <input type="radio" name="search" value="0">
+                  <div class="answer"><label><input type="radio" name="api" value="0"><span>No</span></label>
                   </div>
                 </div>
               </div>
               <div class="question">
-                <label for"cms">Do you need a Content Management System (CMS)? <span class="info" title="A CMS will let you update content on your site without writing code (i.e. a blog)."><i class="fa fa-info-circle"></i></span>
-                </label>
+                <p for"search">Does your website need search? <span class="info" title="The cost to build a search function can vary greatly. The price given here is an average for search integration based on basic tagging. Not Google."><i
+                      class="fa fa-info-circle"></i></span></p>
                 <div class="answers">
-                  <div class="answer"> Yes <input type="radio" name="cms" value="1500">
+                  <div class="answer"><label><input type="radio" name="search" value="2000"><span>Yes</span></label>
                   </div>
-                  <div class="answer"> No <input type="radio" name="cms" value="0">
+                  <div class="answer"> <label><input type="radio" name="search" value="0"><span>No</span></label>
+                  </div>
+                </div>
+              </div>
+              <div class="question">
+                <p for"cms">Do you need a Content Management System (CMS)? <span class="info" title="A CMS will let you update content on your site without writing code (i.e. a blog)."><i class="fa fa-info-circle"></i></span>
+                </p>
+                <div class="answers">
+                  <div class="answer"><label><input type="radio" name="cms" value="1500"><span>Yes</span></label>
+                  </div>
+                  <div class="answer"><label><input type="radio" name="cms" value="0"><span>No</span></label>
                   </div>
                 </div>
               </div>
               <button class="btn next" type="button" href="#">Next</button>
               <button class="btn previous" type="button" href="#">Back</button>
+              <button id="submit" class="btn submit" type="button" href="#">Submit</button>
             </form>
             <p class="results">Your estimated cost is: <span id="cost"></span></p>
           </div>
@@ -264,7 +330,9 @@
             <p class="lead">We try to make sure that all our clients are as happy as can be during and after the process of delivering exceptional products</p>
           </div>
           <div class="col-lg-3 mt">
-            <p><a href="mailto:admin@dekendesign.com" class="btn btn-theme btn-lg">CONTACT US</a></p>
+            <p><a
+                href="mailto:admin@dekendesign.com?subject=Website/App%20Inquiry&body=I%20would%20like%20help%20with%20building%7Cmodifiying%20a%20website%7Capplication.%20Feel%20free%20to%20contact%20me%20for%20details.%20Sincerely%2C%20Your%20Name"
+                class="btn btn-theme btn-lg">CONTACT US</a></p>
           </div>
         </div>
       </div>
@@ -338,62 +406,71 @@
     <!-- Template Main Javascript File -->
     <script src="./dekendesign/js/main.js"></script>
     <script>
-      var pos = 0,
-        len = $("#calc .question").length,
+      var pos,
+        len,
         total;
       $(document).ready(function() {
+        pos = 0;
+        len = $("#calc .question").length;
         $("#calc .question").hide();
-        $("#calc .question").eq(pos).show();
         $("#calc .btn.previous").hide();
+        $("#calc .question").eq(pos).show();
+        $("#calculator .results").hide();
+        $("#calc #submit").hide();
       });
       $("#calc").change(function() {
         total = 0;
         $('#calc .question input[type="radio"]:checked').each(function() {
           total = total + parseInt($(this).val());
         });
-        console.log(total);
+        if (total == 0 || total == undefined) {
+          $("#cost").text("Please call or email us for a customized quote that will meet your project neeeds");
+        } else {
+          $("#cost").text("$" + total.toString().replace(/\B(?=(\d{3})+(?!\d))/g, ",") + " - $" + (total * 1.3).toString().replace(/\B(?=(\d{3})+(?!\d))/g, ","));
+        }
       });
 
-      function change(event) {
-        console.log(pos);
-        if (pos == len - 1 && total != undefined) {
-          if (total == 0) {
-            $("#cost").text("Please call or email us for a customized quote that will meet your project neeeds");
-          } else {
-            $("#cost").text("$" + total + "-$" + total * 1.3);
-          }
-          if (event.data.position < 0) {
-            pos = pos + event.data.position;
-            $("#calc .btn.next").text('Next');
-            $("#calc .question").eq(pos).show();
-          }
-        } else {
-          $("#calc .question").hide();
-          pos = pos + event.data.position;
-          $("#calc .question").eq(pos).show();
-          $("#calc .btn.previous").show();
-          if (pos > 0) {
-            $("#calc .btn.previous").show();
-          } else {
-            $("#calc .btn.previous").hide();
-          }
-          if (pos >= len - 1) {
-            $("#calc .btn.next").text('Calculate');
-          } else {
-            $("#calc .btn.next").show();
-            $("#calc .btn.next").text('Next');
-          }
-          if (pos >= len || pos < 0) {
-            pos = 0;
-          }
+      function changeQuestion(event) {
+        last = pos;
+        pos = pos + event.data.position;
+        if (pos < 0) {
+          pos = 0;
+        } else if (pos > len - 1) {
+          pos = len - 1;
         }
+        switch (pos) {
+          case 0:
+            $("#calc .btn.previous").hide();
+            $("#calc .btn.next").show();
+            $("#calculator .results").hide();
+            $("#calc #submit").hide();
+            break;
+          case len - 1:
+            $("#calc .btn.next").hide();
+            $("#calc #submit").show();
+            $("#calc .btn.previous").text("Start Over");
+            pos = -1;
+            break;
+          default:
+            $("#calc .btn.previous").show();
+            $("#calc .btn.previous").text("Back");
+            $("#calc .btn.next").show();
+            $("#calculator .results").hide();
+            $("#calc #submit").hide();
+        }
+        $("#calc .question").eq(pos).show();
+        $("#calc .question").eq(last).hide();
       }
       $("#calc .btn.previous").click({
         position: -1
-      }, change);
+      }, changeQuestion);
       $("#calc .btn.next").click({
         position: 1
-      }, change);
+      }, changeQuestion);
+      $("#calc .btn.submit").click(function() {
+        $("#calc #submit").hide();
+        $("#calculator .results").show();
+      });
     </script>
   </body>
 
