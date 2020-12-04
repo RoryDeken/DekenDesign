@@ -179,7 +179,14 @@
       @media(max-width:768px) {
         .question {
           align-items: flex-start;
-          padding: 20px;
+          padding-top: 25px;
+          padding-bottom: 50px;
+        }
+
+        #calc .answers {
+          flex-basis: 100%;
+          display: flex;
+          flex-wrap: wrap;
         }
       }
     </style>
@@ -323,9 +330,9 @@
               </div>
               <button class="btn next" type="button" href="#">Next</button>
               <button class="btn previous" type="button" href="#">Back</button>
-              <button id="submit" class="btn submit" type="button" href="#">Submit</button>
+              <button id="submit" class="btn submit" type="button" href="#results">Submit</button>
             </form>
-            <p class="results">Your estimated cost is: <span id="cost"></span></p>
+            <p class="results" id="results">Your estimated cost is: <span id="cost"></span></p>
           </div>
         </div>
       </div>
